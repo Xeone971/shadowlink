@@ -205,16 +205,13 @@ logger.error = (msg, options) => {
 }
 
 export default defineConfig({
+	base: '/shadowlink/',
 	customLogger: logger,
 	plugins: [
 		...(isDev ? [inlineEditPlugin(), editModeDevPlugin()] : []),
 		react(),
 		addTransformIndexHtml
 	],
-	base: '/shadowlink/',
-	build: {
-		outDir: 'dist',
-		assetsDir: 'assets'},
 		server: {
 			cors: true,
 			headers: {
