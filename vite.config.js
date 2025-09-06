@@ -159,7 +159,7 @@ const addTransformIndexHtml = {
 			},
 			{
 				tag: 'script',
-				attrs: {type: 'module'},
+				attrs: { type: 'module' },
 				children: configHorizonsConsoleErrroHandler,
 				injectTo: 'head',
 			},
@@ -175,7 +175,7 @@ const addTransformIndexHtml = {
 			tags.push(
 				{
 					tag: 'script',
-					attrs: { 
+					attrs: {
 						src: process.env.TEMPLATE_BANNER_SCRIPT_URL,
 						'template-redirect-url': process.env.TEMPLATE_REDIRECT_URL,
 					},
@@ -191,7 +191,7 @@ const addTransformIndexHtml = {
 	},
 };
 
-console.warn = () => {};
+console.warn = () => { };
 
 const logger = createLogger()
 const loggerError = logger.error
@@ -211,27 +211,31 @@ export default defineConfig({
 		react(),
 		addTransformIndexHtml
 	],
-	server: {
-		cors: true,
-		headers: {
-			'Cross-Origin-Embedder-Policy': 'credentialless',
-		},
-		allowedHosts: true,
-	},
-	resolve: {
-		extensions: ['.jsx', '.js', '.tsx', '.ts', '.json', ],
-		alias: {
-			'@': path.resolve(__dirname, './src'),
-		},
-	},
+	base: '/shadowlink/',
 	build: {
-		rollupOptions: {
-			external: [
-				'@babel/parser',
-				'@babel/traverse',
-				'@babel/generator',
-				'@babel/types'
-			]
+		outDir: 'dist',
+		assetsDir: 'assets'},
+		server: {
+			cors: true,
+			headers: {
+				'Cross-Origin-Embedder-Policy': 'credentialless',
+			},
+			allowedHosts: true,
+		},
+		resolve: {
+			extensions: ['.jsx', '.js', '.tsx', '.ts', '.json',],
+			alias: {
+				'@': path.resolve(__dirname, './src'),
+			},
+		},
+		build: {
+			rollupOptions: {
+				external: [
+					'@babel/parser',
+					'@babel/traverse',
+					'@babel/generator',
+					'@babel/types'
+				]
+			}
 		}
-	}
-});
+	});
