@@ -67,11 +67,11 @@ const ScanResults = ({ data, isScanning, onViewChange }) => {
   };
 
   const handleExport = () => {
-    toast({ title: "🚧 Cette fonctionnalité n'est pas encore implémentée—mais ne vous inquiétez pas ! Vous pouvez la demander dans votre prochaine invite ! 🚀" });
+    toast({ title: "🚧 Cette fonctionnalité n'est pas encore implémentée—mais ne vous inquiétez pas ! Vous la retrouverez rapidement ! 🚀" });
   };
 
   const handleShare = () => {
-    toast({ title: "🚧 Cette fonctionnalité n'est pas encore implémentée—mais ne vous inquiétez pas ! Vous pouvez la demander dans votre prochaine invite ! 🚀" });
+    toast({ title: "🚧 Cette fonctionnalité n'est pas encore implémentée—mais ne vous inquiétez pas ! Vous la retrouverez rapidement ! 🚀" });
   };
 
   return (
