@@ -10,7 +10,7 @@ if (isDev) {
 	editModeDevPlugin = (await import('./plugins/visual-editor/vite-plugin-edit-mode.js')).default;
 }
 
-const configHorizonsViteErrorHandler = `
+const configViteErrorHandler = `
 const observer = new MutationObserver((mutations) => {
 	for (const mutation of mutations) {
 		for (const addedNode of mutation.addedNodes) {
@@ -50,14 +50,14 @@ function handleViteOverlay(node) {
 		const error = messageText + (fileText ? ' File:' + fileText : '');
 
 		window.parent.postMessage({
-			type: 'horizons-vite-error',
+			type: 'vite-error',
 			error,
 		}, '*');
 	}
 }
 `;
 
-const configHorizonsRuntimeErrorHandler = `
+const configRuntimeErrorHandler = `
 window.onerror = (message, source, lineno, colno, errorObj) => {
 	const errorDetails = errorObj ? JSON.stringify({
 		name: errorObj.name,
@@ -69,14 +69,14 @@ window.onerror = (message, source, lineno, colno, errorObj) => {
 	}) : null;
 
 	window.parent.postMessage({
-		type: 'horizons-runtime-error',
+		type: 'runtime-error',
 		message,
 		error: errorDetails
 	}, '*');
 };
 `;
 
-const configHorizonsConsoleErrroHandler = `
+const configConsoleErrroHandler = `
 const originalConsoleError = console.error;
 console.error = function(...args) {
 	originalConsoleError.apply(console, args);
@@ -96,7 +96,7 @@ console.error = function(...args) {
 	}
 
 	window.parent.postMessage({
-		type: 'horizons-console-error',
+		type: 'console-error',
 		error: errorString
 	}, '*');
 };
@@ -148,19 +148,19 @@ const addTransformIndexHtml = {
 			{
 				tag: 'script',
 				attrs: { type: 'module' },
-				children: configHorizonsRuntimeErrorHandler,
+				children: configRuntimeErrorHandler,
 				injectTo: 'head',
 			},
 			{
 				tag: 'script',
 				attrs: { type: 'module' },
-				children: configHorizonsViteErrorHandler,
+				children: configViteErrorHandler,
 				injectTo: 'head',
 			},
 			{
 				tag: 'script',
 				attrs: { type: 'module' },
-				children: configHorizonsConsoleErrroHandler,
+				children: configConsoleErrroHandler,
 				injectTo: 'head',
 			},
 			{
